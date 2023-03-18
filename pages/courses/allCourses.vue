@@ -1,19 +1,19 @@
 <template>
   <div>
-    <Preloader v-if="isShowPreloader"/>
-    <CourseList v-else/>
+    <CoursesList />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'CoursesPage',
   async fetch ({ store }) {
-    await store.dispatch('courses/getCourses')
-  },
-  computed: {
-    ...mapGetters('courses', ['allCourses', 'isShowPreloader'])
-  },
+    if (!store.state.courses.token) {
+      await store.dispatch('courses/getToken')
+      await store.dispatch('courses/getCourses')
+    } else {
+      await store.dispatch('courses/getCourses')
+    }
+  }
 }
 </script>

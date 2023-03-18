@@ -62,20 +62,20 @@ export default {
       },
       changeOrigin: true,
     },
-    '/images/': {
-      target: 'https://wisey.app',
-      pathRewrite: {
-        '^/images/': ''
-      },
-      changeOrigin: true,
-    },
-    '/videos/': {
-      target: 'https://wisey.app',
-      pathRewrite: {
-        '^/videos/': ''
-      },
-      changeOrigin: true,
-    },
+    // '/images/': {
+    //   target: 'https://wisey.app',
+    //   pathRewrite: {
+    //     '^/images/': ''
+    //   },
+    //   changeOrigin: true,
+    // },
+    // '/videos/': {
+    //   target: 'https://wisey.app',
+    //   pathRewrite: {
+    //     '^/videos/': ''
+    //   },
+    //   changeOrigin: true,
+    // },
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

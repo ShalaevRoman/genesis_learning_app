@@ -3,10 +3,10 @@
 </template>
 
 <script>
-import Hls from "hls.js";
+import Hls from 'hls.js'
 
 export default {
-  name: "VideoPlayer",
+  name: 'VideoPlayer',
   props: ['selectedLesson', 'lessonProgress'],
   watch: {
     selectedLesson () {
@@ -22,7 +22,7 @@ export default {
 
       if (Hls.isSupported()) {
         const hls = new Hls()
-        hls.loadSource(this.selectedLesson.link)
+        hls.loadSource(this.selectedLesson.link )
         hls.attachMedia(video)
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
           video.currentTime = this.selectedLesson.duration * this.lessonProgress / 100
@@ -48,5 +48,12 @@ export default {
 <style scoped>
  .videoPlayer {
    width: 100%;
+   height: 35vh;
+ }
+ @media screen and (max-width: 428px) {
+   .videoPlayer {
+     width: 100%;
+     height: 100%;
+   }
  }
 </style>

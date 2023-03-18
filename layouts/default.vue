@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: 'DefaultLayout',
@@ -57,24 +56,15 @@ export default {
           to: '/'
         },
         {
-          title: 'Course',
+          title: 'Courses',
           to: '/courses/allCourses'
         }
       ],
       title: 'Genesis_learning_app'
     }
   },
-  // async fetch() {
-  //   await this.$store.dispatch('courses/getCourses')
-  // },
-  computed: {
-    ...mapGetters('courses', ['allCourses', 'isShowPreloader'])
+  async fetch() {
+    await this.$store.dispatch('courses/getToken')
   },
-  // beforeMount() {
-  //   this.fetchCourses()
-  // },
-  methods: {
-    ...mapActions('courses', ['fetchCourses'])
-  }
 }
 </script>

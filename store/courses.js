@@ -1,15 +1,11 @@
 export const state = () => ({
   isShowPreloader: false,
-  title: 'Title',
   allCourses: '',
   selectedCourse: null,
-  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyODQxYmVjYS1jMjUxLTRjMGEtYTljYS1lODE5Mzc2NzEwZWYiLCJwbGF0Zm9ybSI6InN1YnNjcmlwdGlvbnMiLCJpYXQiOjE2Nzg3OTgyODcsImV4cCI6MTY3OTY5ODI4N30.mW3wHjb0qarUQTUbtdQ2Q7KX003SvCfe6BZDPZ9AvaQ"
+  token: ''
 })
 
 export const mutations = {
-  SET_TITLE (state, payload) {
-    state.title = payload
-  },
   SET_SELECTED_COURSE(state, payload) {
     state.selectedCourse = payload
   },
@@ -21,9 +17,6 @@ export const mutations = {
   },
   CLEAR_TOKEN (state) {
     state.token = null
-  },
-  SET_STATE_PRELOADER (state, payload) {
-    state.isShowPreloader = payload
   }
 }
 
@@ -36,10 +29,15 @@ export const actions = {
         }
       })
       const { courses } = response.data
-      console.log(courses)
       commit('SET_COURSES', courses)
     } catch (error) {
-      console.log(error)
+      if (error.response) {
+        // Обробка помилки з API
+      } else if (error.request) {
+        // Обробка помилки мережі
+      } else {
+        // Інші помилки
+      }
     }
   },
   async getCourseById({ commit, state }, courseId) {
@@ -51,18 +49,34 @@ export const actions = {
       })
       commit('SET_SELECTED_COURSE', response)
     } catch (error) {
-      console.log(error)
+      if (error.response) {
+        // Обробка помилки з API
+      } else if (error.request) {
+        // Обробка помилки мережі
+      } else {
+        // Інші помилки
+      }
     }
   },
-  async login({ commit }) {
+  async getToken({ commit }) {
     try {
-      const response = await this.$axios.post('/auth/anonymous?platform=subscriptions/')
-      const { token } = response.data
-      commit('SET_TOKEN', token)
-      localStorage.setItem('token', token)
+      const tokenFromLocalStorage = localStorage.getItem('token')
+      if (tokenFromLocalStorage) {
+        commit('SET_TOKEN', tokenFromLocalStorage)
+      } else {
+        const response = await this.$axios.get('/api/auth/anonymous?platform=subscriptions')
+        const { token } = response.data
+        commit('SET_TOKEN', token)
+        localStorage.setItem('token', token)
+      }
     } catch (error) {
-      commit('CLEAR_TOKEN')
-      throw error;
+      if (error.response) {
+        // Обробка помилки з API
+      } else if (error.request) {
+        // Обробка помилки мережі
+      } else {
+        // Інші помилки
+      }
     }
   },
   logout({ commit }) {
