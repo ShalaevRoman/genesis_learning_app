@@ -46,14 +46,14 @@ export default {
 </script>
 
 <style scoped>
- .videoPlayer {
-   width: 100%;
-   height: 35vh;
- }
- @media screen and (max-width: 428px) {
-   .videoPlayer {
-     width: 100%;
-     height: 100%;
-   }
- }
+.videoPlayer {
+  width: 100%;
+  height: 35vh;
+}
+@media screen and (max-width: 428px) {
+  .videoPlayer {
+    width: 100%;
+    height: 100%;
+  }
+}
 </style>

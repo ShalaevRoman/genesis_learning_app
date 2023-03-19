@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
   async getCourses({ commit, state }) {
     try {
-      const response = await this.$axios.get('/api/core/preview-courses', {
+      const response = await this.$axios.get('/api/v1/core/preview-courses', {
         headers: {
           Authorization: `Bearer ${state.token}`
         }
@@ -42,7 +42,7 @@ export const actions = {
   },
   async getCourseById({ commit, state }, courseId) {
     try {
-      const response = await this.$axios.$get(`/api/core/preview-courses/${courseId}`, {
+      const response = await this.$axios.$get(`/api/v1/core/preview-courses/${courseId}`, {
         headers: {
           Authorization: `Bearer ${state.token}`
         }
@@ -64,7 +64,7 @@ export const actions = {
       if (tokenFromLocalStorage) {
         commit('SET_TOKEN', tokenFromLocalStorage)
       } else {
-        const response = await this.$axios.get('/api/auth/anonymous?platform=subscriptions')
+        const response = await this.$axios.get('/api/v1/auth/anonymous?platform=subscriptions')
         const { token } = response.data
         commit('SET_TOKEN', token)
         localStorage.setItem('token', token)

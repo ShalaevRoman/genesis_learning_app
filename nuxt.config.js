@@ -49,7 +49,7 @@ export default {
     '@nuxtjs/axios',
   ],
   axios: {
-    baseURL: 'http://api.wisey.app/', // ваша базовая адреса API
+    baseURL: process.env.API_URL,
     proxy: true,
     headers: {
       common: {
@@ -61,25 +61,8 @@ export default {
   proxy: {
     '/api/': {
       target: 'http://api.wisey.app',
-      pathRewrite: {
-        '^/api/': '/api/v1/'
-      },
       changeOrigin: true,
     },
-    // '/images/': {
-    //   target: 'https://wisey.app',
-    //   pathRewrite: {
-    //     '^/images/': ''
-    //   },
-    //   changeOrigin: true,
-    // },
-    // '/videos/': {
-    //   target: 'https://wisey.app',
-    //   pathRewrite: {
-    //     '^/videos/': ''
-    //   },
-    //   changeOrigin: true,
-    // },
   },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
